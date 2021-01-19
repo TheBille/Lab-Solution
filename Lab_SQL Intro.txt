@@ -1,0 +1,21 @@
+#### Lab | SQL Intro ####
+##Sybille Kiziltan##
+1. 
+There is a Relation Film, then another one for the language, the film category ....
+Based on the film ID in the Relation Film we can go over to the Relation Inventory and 
+from there through the Store ID we can go over to the Relation Store and so on...
+ 
+2. Explore tables by selcting all columns 
+SELECT * FROM sakila.category;
+SELECT * FROM sakila.address;
+
+3.
+SELECT title FROM sakila.film;
+
+4.
+SELECT distinct(language_id) as language 
+FROM film
+
+5.
+SELECT first_name
+FROM sakila.staff
