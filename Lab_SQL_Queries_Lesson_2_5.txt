@@ -1,0 +1,32 @@
+-- Lab SQL Queries - Lesson 2.5
+--1
+select * 
+from sakila.actor
+where first_name = 'Scarlett';
+--2
+select count(distinct(film_id)) as films_available
+from sakila.inventory;
+--3
+select min(length) as min_duration, max(length) as max_duration
+from sakila.film;
+--4
+select avg(length) as avg_duration
+from sakila.fim
+--5
+select count(distinct(last_name))
+from sakila.actor;
+--6
+select datediff(max(rental_date), min(rental_date)) as daysoperating
+from sakila.rental_date;
+--7
+select *, date_format(convert(rental_date,date), '%M') as months,
+dayofweek(SUBSTR(rental_date,1,10)) as weekday,
+from sakila.rental;
+-- 8
+select *, date_format(convert(rental_date,date), '%M') as months,
+dayofweek(SUBSTR(rental_date,1,10)) as weekday,
+case
+when dayofweek(SUBSTR(rental_date,1,10)) in (6,7) then 'Weekend'
+else 'Weekday'
+end as Week_day_end
+from sakila.rental;
