@@ -1,0 +1,86 @@
+-- Lab SQL Queries 2 - Lesson 2.6
+-- 1
+select distinct(release_year)
+from film;
+-- 2
+select *
+from film
+where title like '%armageddon%';
+
+-- 3
+select *
+from film 
+where title like '%apollo';
+-- 4
+select title 
+from film 
+order by length desc
+limit 10;
+-- 5 --
+select *
+from sakila.film
+where special_features like '%Behind the Scenes%';   
+
+-- 6 --
+alter table staff
+drop column picture;
+
+-- 7 -- 
+-- checking the database for Tammy Sanders
+select customer_id, address_id, email from sakila.customer
+where first_name = 'TAMMY' and last_name = 'SANDERS';
+
+-- checking the satff table to know which columns it has
+select * 
+from staff;
+-- insert Tammy Sanders into the staff table
+insert into staff value (3,'Tammy', 'Sanders', 79, 'TAMMY.SANDERS@sakilacustomer.org', 2,1, 'Tammy', NULL, CURRENT_TIMESTAMP);
+
+-- 8 --
+
+select customer_id from sakila.customer
+where first_name = 'CHARLOTTE' and last_name = 'HUNTER';
+
+select * 
+from rental;
+-- first step (film id 1) --
+select film_id 
+from film
+where title = 'Academy Dinosaur';
+-- step to staff id (1 in store 1) 
+select * 
+from staff;
+
+-- select inventory id
+select * 
+from inventory
+where film_id = 1;
+
+insert into rental value(Null,CURRENT_TIMESTAMP, 1, 130, Null, 1, CURRENT_TIMESTAMP);
+
+-- check --
+select * 
+from rental
+order by rental_date desc
+limit 10;
+
+-- 9 --
+-- creating  a back up tbale 
+create table sakila.deleted_users (
+	customer_id smallint unsigned NOT NULL,
+	email varchar(50) DEFAULT NULL,
+	date_deleted datetime NOT NULL,
+	PRIMARY KEY (customer_id));
+    
+    select customer_id, email
+    from customer
+    where active = 0;
+    
+    insert into deleted_users
+	select customer_id, email, CURDATE()
+    from customer
+    where active = 0;
+    
+-- check whether it worked    
+select * 
+from deleted_users
